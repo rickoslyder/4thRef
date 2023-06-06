@@ -34,7 +34,67 @@ import {
   CategoryList,
   CategoryShow,
 } from "./pages/categories";
+import {
+  SportCreate, SportEdit, SportList, SportShow
+} from "./pages/sports";
+import { EventCreate, EventEdit, EventList, EventShow } from "./pages/events";
+import { MatchCreate, MatchEdit, MatchList, MatchShow } from "./pages/matches";
+import { ScoreCreate, ScoreEdit, ScoreList, ScoreShow } from "./pages/scores";
+import { VoteCreate, VoteEdit, VoteList, VoteShow } from "./pages/votes";
 import { supabaseClient } from "./utility";
+
+const SITE_RESOURCES = [
+  {
+    name: "sports",
+    list: "/sports",
+    create: "/sports/create",
+    edit: "/sports/edit/:id",
+    show: "/sports/show/:id",
+    meta: {
+      canDelete: true,
+    },
+  },
+  {
+    name: "events",
+    list: "/events",
+    create: "/events/create",
+    edit: "/events/edit/:id",
+    show: "/events/show/:id",
+    meta: {
+      canDelete: true,
+    },
+  },
+  {
+    name: "matches",
+    list: "/matches",
+    create: "/matches/create",
+    edit: "/matches/edit/:id",
+    show: "/matches/show/:id",
+    meta: {
+      canDelete: true,
+    },
+  },
+  {
+    name: "scores",
+    list: "/scores",
+    create: "/scores/create",
+    edit: "/scores/edit/:id",
+    show: "/scores/show/:id",
+    meta: {
+      canDelete: true,
+    },
+  },
+  {
+    name: "votes",
+    list: "/votes",
+    create: "/votes/create",
+    edit: "/votes/edit/:id",
+    show: "/votes/show/:id",
+    meta: {
+      canDelete: true,
+    },
+  },
+]
 
 function App() {
   const { t, i18n } = useTranslation();
@@ -47,7 +107,6 @@ function App() {
 
   return (
     <BrowserRouter>
-      <GitHubBanner />
       <RefineKbarProvider>
         {/* You can change the theme colors here. example: theme={RefineThemes.Magenta} */}
         <ChakraProvider theme={RefineThemes.Blue}>
@@ -58,28 +117,7 @@ function App() {
             routerProvider={routerBindings}
             notificationProvider={notificationProvider}
             i18nProvider={i18nProvider}
-            resources={[
-              {
-                name: "blog_posts",
-                list: "/blog-posts",
-                create: "/blog-posts/create",
-                edit: "/blog-posts/edit/:id",
-                show: "/blog-posts/show/:id",
-                meta: {
-                  canDelete: true,
-                },
-              },
-              {
-                name: "categories",
-                list: "/categories",
-                create: "/categories/create",
-                edit: "/categories/edit/:id",
-                show: "/categories/show/:id",
-                meta: {
-                  canDelete: true,
-                },
-              },
-            ]}
+            resources={SITE_RESOURCES}
             options={{
               syncWithLocation: true,
               warnWhenUnsavedChanges: true,
@@ -119,6 +157,36 @@ function App() {
                   <Route path="create" element={<CategoryCreate />} />
                   <Route path="edit/:id" element={<CategoryEdit />} />
                   <Route path="show/:id" element={<CategoryShow />} />
+                </Route>
+                <Route path="/sports">
+                  <Route index element={<SportList />} />
+                  <Route path="create" element={<SportCreate />} />
+                  <Route path="edit/:id" element={<SportEdit />} />
+                  <Route path="show/:id" element={<SportShow />} />
+                </Route>
+                <Route path="/events">
+                  <Route index element={<EventList />} />
+                  <Route path="create" element={<EventCreate />} />
+                  <Route path="edit/:id" element={<EventEdit />} />
+                  <Route path="show/:id" element={<EventShow />} />
+                </Route>
+                <Route path="/matches">
+                  <Route index element={<MatchList />} />
+                  <Route path="create" element={<MatchCreate />} />
+                  <Route path="edit/:id" element={<MatchEdit />} />
+                  <Route path="show/:id" element={<MatchShow />} />
+                </Route>
+                <Route path="/scores">
+                  <Route index element={<ScoreList />} />
+                  <Route path="create" element={<ScoreCreate />} />
+                  <Route path="edit/:id" element={<ScoreEdit />} />
+                  <Route path="show/:id" element={<ScoreShow />} />
+                </Route>
+                <Route path="/votes">
+                  <Route index element={<VoteList />} />
+                  <Route path="create" element={<VoteCreate />} />
+                  <Route path="edit/:id" element={<VoteEdit />} />
+                  <Route path="show/:id" element={<VoteShow />} />
                 </Route>
                 <Route path="*" element={<ErrorComponent />} />
               </Route>
